@@ -1,5 +1,7 @@
 const { app, BrowserWindow } = require('electron')
 const { ipcMain } = require('electron')
+const Datastore = require('nedb')
+const db = new Datastore({ filename: 'datastore/data', autoload: true });
 
 ipcMain.on('asynchronous-request', (event, arg) => {
     console.log("asynchronous-request", arg) // prints "async ping"
