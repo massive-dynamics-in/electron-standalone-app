@@ -1,19 +1,15 @@
 const { app, BrowserWindow } = require('electron')
 const { ipcMain } = require('electron')
-const Datastore = require('nedb')
-const db = new Datastore({ filename: 'datastore/data', autoload: true });
 
-ipcMain.on('asynchronous-request', (event, arg) => {
-    console.log("asynchronous-request", arg) // prints "async ping"
-    event.reply('asynchronous-reply', 'pong')
-})
+const db_operations = require('./db_operations.js')
+ipcMain.on('db', db_operations)
 
 // gets triggered by the sync button defined in the App component
-ipcMain.on('synchronous-request', (event, arg) => {
-    console.log("synchronous-request", arg) // prints "sync ping"
-    //reply
-    event.returnValue = 'pong'
-})
+// ipcMain.on('synchronous-request', (event, arg) => {
+//     console.log("synchronous-request", arg) // prints "sync ping"
+//     //reply
+//     event.returnValue = 'pong'
+// })
 
 function createWindow () {
   // Create the browser window.
