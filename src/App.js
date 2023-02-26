@@ -48,7 +48,7 @@ const Home = () => {
 			<button onClick={() => {
 				ipcRenderer.send('db', {
 					collection: 'clients',
-					operation: 'find',
+					operation: 'count',
 					query: {}
 				})
 
